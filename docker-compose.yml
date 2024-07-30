@@ -1,0 +1,14 @@
+# TODO: expose port
+# TODO: add volume
+
+services:
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: example
+      MARIADB_USER: barbara
+      MARIADB_PASSWORD: password
+      MARIADB_DATABASE: mealplan
+    ports:
+      - "3306:3306"
