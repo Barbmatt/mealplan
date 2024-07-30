@@ -1,0 +1,10 @@
+.config
+.vscode
+bin
+obj
+Properties
+.dockerignore
+.editorconfig
+.gitignore
+appsettings.json
+Dockerfile
