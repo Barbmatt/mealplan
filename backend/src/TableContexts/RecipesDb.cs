@@ -3,11 +3,11 @@ using TableRecipes;
 
 namespace RecipesDbContext
 {
-    class RecipesDb : DbContext
-    {
-        public RecipesDb(DbContextOptions<RecipesDb> options)
-            : base(options) { }
+  class RecipesDb : DbContext
+  {
+    public RecipesDb(DbContextOptions<RecipesDb> options)
+      : base(options) { }
 
-        public DbSet<Recipes> Recipes => Set<Recipes>();
-    }
+    public DbSet<Recipes> Recipes => Set<Recipes>();
+  }
 }

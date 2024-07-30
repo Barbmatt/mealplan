@@ -1,4 +1,4 @@
-using IngridientManagment;
+using IngredientManagment;
 using Microsoft.EntityFrameworkCore;
 using RecipesManagement;
 
@@ -14,16 +14,16 @@ var settings = mealplanDBSettings.Get<MealplanDBSettings>();
 
 if (settings == null)
 {
-    throw new NullReferenceException("No configuration for database connection.");
+  throw new NullReferenceException("No configuration for database connection.");
 }
 
 var serverVersion = new MariaDbServerVersion(new Version(8, 0, 36));
 
 var connectionString =
-    $"server={settings.Server};user={settings.Username};password={settings.Password};database={settings.Database}";
+  $"server={settings.Server};user={settings.Username};password={settings.Password};database={settings.Database}";
 
 var recipesServices = new RecipesServices(builder, connectionString, serverVersion);
-var IngridientsServices = new IngridientsServices(builder, connectionString, serverVersion);
+var IngredientsServices = new IngredientsServices(builder, connectionString, serverVersion);
 
 var app = builder.Build();
 
@@ -33,10 +33,10 @@ recipesServices.addNewRecipe(app);
 recipesServices.modifyRecipe(app);
 recipesServices.deleteRecipe(app);
 
-IngridientsServices.getIngridients(app);
-IngridientsServices.getIngridientById(app);
-IngridientsServices.addNewIngridient(app);
-IngridientsServices.modifyIngridient(app);
-IngridientsServices.deleteIngridientById(app);
+IngredientsServices.getIngredients(app);
+IngredientsServices.getIngredientById(app);
+IngredientsServices.addNewIngredient(app);
+IngredientsServices.modifyIngredient(app);
+IngredientsServices.deleteIngredientById(app);
 
 app.Run();
