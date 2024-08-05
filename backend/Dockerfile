@@ -10,4 +10,4 @@ ADD . /backend/
 
 RUN dotnet build backend.csproj
 
-CMD dotnet run backend.csproj
+CMD [ "dotnet", "run", "backend.csproj" ]
