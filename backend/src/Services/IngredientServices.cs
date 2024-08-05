@@ -2,7 +2,7 @@ using IngredientsDbContext;
 using Microsoft.EntityFrameworkCore;
 using TableIngredients;
 
-namespace IngredientManagment
+namespace IngredientManagement
 {
   public class IngredientsServices
   {
