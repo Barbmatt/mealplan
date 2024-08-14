@@ -25,13 +25,13 @@ namespace RecipesManagement
 
     public void getRecipes(WebApplication app)
     {
-      app.MapGet("/Recipesitems", async (RecipesDb db) => await db.Recipes.ToListAsync());
+      app.MapGet("/Recipes", async (RecipesDb db) => await db.Recipes.ToListAsync());
     }
 
     public void getRecipeById(WebApplication app)
     {
       app.MapGet(
-        "/Recipesitems/{id}",
+        "/Recipes/{id}",
         async (int id, RecipesDb db) =>
           await db.Recipes.FindAsync(id) is Recipes Recipes
             ? Results.Ok(Recipes)
@@ -42,13 +42,13 @@ namespace RecipesManagement
     public void addNewRecipe(WebApplication app)
     {
       app.MapPost(
-        "/Recipesitems",
+        "/Recipes",
         async (Recipes Recipes, RecipesDb db) =>
         {
           db.Recipes.Add(Recipes);
           await db.SaveChangesAsync();
 
-          return Results.Created($"/Recipesitems/{Recipes.Id}", Recipes);
+          return Results.Created($"/Recipes/{Recipes.Id}", Recipes);
         }
       );
     }
@@ -56,7 +56,7 @@ namespace RecipesManagement
     public void deleteRecipe(WebApplication app)
     {
       app.MapDelete(
-        "/Recipesitems/{id}",
+        "/Recipes/{id}",
         async (int id, RecipesDb db) =>
         {
           if (await db.Recipes.FindAsync(id) is Recipes Recipes)
@@ -74,7 +74,7 @@ namespace RecipesManagement
     public void modifyRecipe(WebApplication app)
     {
       app.MapPut(
-        "/Recipesitems/{id}",
+        "/Recipes/{id}",
         async (int id, Recipes inputRecipes, RecipesDb db) =>
         {
           var Recipes = await db.Recipes.FindAsync(id);

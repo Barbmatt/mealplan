@@ -2,7 +2,7 @@ using IngredientsDbContext;
 using Microsoft.EntityFrameworkCore;
 using TableIngredients;
 
-namespace IngredientManagement
+namespace IngredientsManagement
 {
   public class IngredientsServices
   {
@@ -25,16 +25,13 @@ namespace IngredientManagement
 
     public void getIngredients(WebApplication app)
     {
-      app.MapGet(
-        "/Ingredientsitems",
-        async (IngredientsDb db) => await db.Ingredients.ToListAsync()
-      );
+      app.MapGet("/Ingredients", async (IngredientsDb db) => await db.Ingredients.ToListAsync());
     }
 
     public void getIngredientById(WebApplication app)
     {
       app.MapGet(
-        "/Ingredientsitems/{id}",
+        "/Ingredients/{id}",
         async (int id, IngredientsDb db) =>
           await db.Ingredients.FindAsync(id) is Ingredients Ingredients
             ? Results.Ok(Ingredients)
@@ -45,13 +42,13 @@ namespace IngredientManagement
     public void addNewIngredient(WebApplication app)
     {
       app.MapPost(
-        "/Ingredientsitems",
+        "/Ingredients",
         async (Ingredients Ingredients, IngredientsDb db) =>
         {
           db.Ingredients.Add(Ingredients);
           await db.SaveChangesAsync();
 
-          return Results.Created($"/Ingredientsitems/{Ingredients.Id}", Ingredients);
+          return Results.Created($"/Ingredients/{Ingredients.Id}", Ingredients);
         }
       );
     }
@@ -59,7 +56,7 @@ namespace IngredientManagement
     public void modifyIngredient(WebApplication app)
     {
       app.MapPut(
-        "/Ingredientsitems/{id}",
+        "/Ingredients/{id}",
         async (int id, Ingredients inputIngredients, IngredientsDb db) =>
         {
           var Ingredients = await db.Ingredients.FindAsync(id);
@@ -80,7 +77,7 @@ namespace IngredientManagement
     public void deleteIngredientById(WebApplication app)
     {
       app.MapDelete(
-        "/Ingredientsitems/{id}",
+        "/Ingredients/{id}",
         async (int id, IngredientsDb db) =>
         {
           if (await db.Ingredients.FindAsync(id) is Ingredients Ingredients)

@@ -5,9 +5,12 @@ import React from "react";
 import { Container, Menu } from "./header.styles.ts";
 import { usePathname } from "next/navigation";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function Header() {
   const route = usePathname();
-
+  const notify = () => toast("Wow so easy!");
   return (
     <Container>
       <Image src="icon.svg" width={30} height={30} alt="icon" />

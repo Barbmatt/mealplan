@@ -38,5 +38,4 @@ msbuild.wrn
 
 # Configuration
 /appsettings.json
-/Properties
 /.config

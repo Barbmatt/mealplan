@@ -9,5 +9,9 @@
 			"path": "../db"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"cSpell.words": [
+			"Mealplan"
+		]
+	}
 }

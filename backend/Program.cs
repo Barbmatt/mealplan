@@ -1,9 +1,21 @@
-using IngredientManagment;
+using IngredientsManagement;
 using Microsoft.EntityFrameworkCore;
 using RecipesManagement;
 
 // service init
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+  options.AddDefaultPolicy(policy =>
+  {
+    policy
+      .WithOrigins("http://localhost:3000", "http://localhost:5000")
+      .AllowAnyHeader()
+      .AllowAnyMethod();
+    ;
+  });
+});
 
 // db init
 var mealplanDBSettings = builder.Configuration.GetSection(MealplanDBSettings.MealplanDB);
@@ -38,5 +50,7 @@ IngredientsServices.getIngredientById(app);
 IngredientsServices.addNewIngredient(app);
 IngredientsServices.modifyIngredient(app);
 IngredientsServices.deleteIngredientById(app);
+
+app.UseCors();
 
 app.Run();

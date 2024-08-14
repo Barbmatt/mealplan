@@ -5,6 +5,7 @@ import "@mantine/core/styles.css";
 import { ColorSchemeScript, createTheme, MantineProvider } from "@mantine/core";
 import Header from "../components/header/header";
 import React from "react";
+import { ToastContainer } from "react-toastify";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,6 +32,7 @@ export default function RootLayout({
         {
           <MantineProvider theme={theme}>
             <Header />
+            <ToastContainer />
             {children}
           </MantineProvider>
         }
