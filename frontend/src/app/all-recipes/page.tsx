@@ -1,5 +1,6 @@
-import React from "react";
+import ServerComponent from "./server-component.tsx";
+import ClientComponent from "./client-component.tsx";
 
 export default function AllRecipes() {
-  return <div>All recipes</div>;
+  return <ServerComponent />;
 }

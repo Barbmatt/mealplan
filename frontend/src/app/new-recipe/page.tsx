@@ -1,54 +1,34 @@
 "use client";
-
 import { Button, Text, TextInput, Textarea } from "@mantine/core";
-import React from "react";
+import React, { useActionState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { revalidatePath } from "next/cache";
+import { createRecipe } from "../actions/createRecipe";
+import { useFormState } from "react-dom";
 
 const nameId = "name";
 const stepsId = "steps";
 const categoryId = "category";
 const linkId = "link";
 
-async function createRecipe(e: React.FormEvent<HTMLFormElement>) {
-  e.preventDefault();
-  const formData = new FormData(e.target as HTMLFormElement);
-
-  const rawFormData = {
-    name: formData.get(nameId),
-    steps: formData.get(stepsId),
-    category: formData.get(categoryId),
-    link: formData.get(linkId),
-  };
-
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/Recipes`,
-    {
-      method: "POST",
-      body: JSON.stringify(rawFormData),
-      headers: { "Content-Type": "application/json" },
-    }
-  );
-  return response.status === 201;
-}
-
 export default function NewRecipeForm() {
   const router = useRouter();
+  const [state, action] = useFormState(createRecipe, undefined);
 
-  const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    const result = await createRecipe(e);
-    if (result) {
+  useEffect(() => {
+    if (state === true) {
       toast.success("Wow so easy!");
-      router.push("/all-recipes");
-    } else {
-      toast.error("There was an error");
+      router.push("all-recipes");
+    } else if (state === false) {
+      toast.error("error");
     }
-  };
+  }, [router, state]);
 
   return (
-    <form onSubmit={handleOnSubmit}>
+    <form action={action}>
       <Text>Create a New Recipe</Text>
       <TextInput required name={nameId} label="Name" />
       {/* <MultiSelect
